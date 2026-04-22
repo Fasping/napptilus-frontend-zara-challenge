@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { getProductById } from '../services/api';
 import { ProductDetail, ColorOption, StorageOption } from '../types';
 import ProductCard from '../components/ProductCard';
+import { useCart } from '../context/CartContext';
 
 export default function ProductDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -12,6 +13,8 @@ export default function ProductDetailPage() {
 
   const [selectedColor, setSelectedColor] = useState<ColorOption | null>(null);
   const [selectedStorage, setSelectedStorage] = useState<StorageOption | null>(null);
+  
+  const { addToCart } = useCart();
   
   useEffect(() => {
     async function fetchProduct() {
@@ -91,7 +94,20 @@ export default function ProductDetailPage() {
           <button 
             className="add-to-cart-btn"
             disabled={!canAddToCart}
-            onClick={() => alert('Add to cart (placeholder)')}
+            onClick={() => {
+              if (product && selectedColor && selectedStorage) {
+                addToCart({
+                  productId: product.id,
+                  name: product.name,
+                  brand: product.brand,
+                  imageUrl: currentImage,
+                  color: selectedColor.name,
+                  storage: selectedStorage.capacity,
+                  price: product.basePrice + selectedStorage.price,
+                  quantity: 1
+                });
+              }
+            }}
           >
             ADD TO CART
           </button>
