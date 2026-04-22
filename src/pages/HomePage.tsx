@@ -39,8 +39,13 @@ export default function HomePage() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <div className="results-count">
-          {products.length} RESULTS
+        <div className="search-info">
+          <div className="results-count">
+            {products.length} RESULTS
+          </div>
+          <div className="filter-label">
+            FILTRAR
+          </div>
         </div>
       </div>
 
