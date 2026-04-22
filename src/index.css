@@ -205,3 +205,41 @@ ul, ol {
 .product-card:hover .product-price {
   color: var(--bg-color);
 }
+
+/* --- Search Section --- */
+.search-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+  padding: 0;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 300px;
+  border: none;
+  border-bottom: var(--border-thin);
+  padding: 8px 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  background: transparent;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.results-count {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.empty-state {
+  padding: var(--spacing-lg) 0;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+}
