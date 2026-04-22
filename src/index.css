@@ -261,3 +261,213 @@ ul, ol {
   font-size: var(--font-size-sm);
   text-transform: uppercase;
 }
+
+/* --- Product Detail Page --- */
+.product-detail-page {
+  padding-bottom: var(--spacing-lg);
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.back-link:hover {
+  color: var(--text-primary);
+}
+
+.product-detail-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .product-detail-layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.product-image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-sm);
+}
+
+.product-detail-image {
+  width: 100%;
+  max-width: 500px;
+  object-fit: contain;
+  transition: opacity 0.3s ease;
+}
+
+.product-info-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .product-info-section {
+    padding-left: var(--spacing-lg);
+    margin: 0;
+  }
+}
+
+.product-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: var(--border-thin);
+}
+
+.product-detail-name {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  text-transform: uppercase;
+}
+
+.product-detail-price {
+  font-size: var(--font-size-md);
+}
+
+.product-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+}
+
+.color-options {
+  display: flex;
+  gap: 12px;
+}
+
+.color-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s;
+}
+
+.color-btn.selected {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 2px;
+}
+
+.storage-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.storage-btn {
+  padding: 8px 16px;
+  border: var(--border-thin);
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.storage-btn:hover {
+  border-color: var(--text-primary);
+}
+
+.storage-btn.selected {
+  background-color: var(--text-primary);
+  color: var(--bg-color);
+  border-color: var(--text-primary);
+}
+
+.add-to-cart-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: var(--text-primary);
+  color: var(--bg-color);
+  border: none;
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-to-cart-btn:disabled {
+  background-color: var(--border-color);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+}
+
+.product-specs-section {
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.section-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: var(--border-thin);
+}
+
+.specs-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.spec-item {
+  display: flex;
+  padding: 12px 0;
+  border-bottom: var(--border-thin);
+  font-size: var(--font-size-sm);
+}
+
+.spec-name {
+  width: 30%;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  padding-right: var(--spacing-sm);
+}
+
+.spec-value {
+  width: 70%;
+}
+
+.similar-products-section {
+  margin-top: var(--spacing-lg);
+}
