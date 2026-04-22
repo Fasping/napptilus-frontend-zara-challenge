@@ -1,3 +1,29 @@
+:root {
+  /* Colors */
+  --bg-color: #ffffff;
+  --text-primary: #111111;
+  --text-secondary: #666666;
+  --border-color: #e5e5e5;
+
+  /* Typography */
+  --font-family: Helvetica, Arial, sans-serif;
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-md: 1rem;     /* 16px */
+  --font-size-lg: 1.5rem;   /* 24px */
+  
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+
+  /* Spacing */
+  --spacing-sm: 1rem;    /* 16px */
+  --spacing-md: 2rem;    /* 32px */
+  --spacing-lg: 4rem;    /* 64px */
+
+  /* Borders */
+  --border-thin: 1px solid var(--border-color);
+}
+
+/* --- Reset --- */
 * {
   margin: 0;
   padding: 0;
@@ -5,17 +31,29 @@
 }
 
 body {
-  font-family: Helvetica, Arial, sans-serif;
-  min-height: 100vh;
-  background-color: #f0f0f0;
-  color: #333;
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-primary);
+  background-color: var(--bg-color);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  font-size: 2rem;
-  font-weight: bold;
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* --- Layout --- */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-sm);
 }
