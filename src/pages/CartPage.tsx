@@ -20,8 +20,8 @@ export default function CartPage() {
       <h2 className="cart-title">CART <span>({cartItems.length})</span></h2>
 
       <div className="cart-items-list">
-        {cartItems.map((item) => (
-          <div key={`${item.productId}-${item.color}-${item.storage}`} className="cart-item">
+        {cartItems.map((item, index) => (
+          <div key={`${item.productId}-${item.color}-${item.storage}-${index}`} className="cart-item">
             <div className="cart-item-image-container">
               <img src={item.imageUrl} alt={item.name} className="cart-item-image" />
             </div>
@@ -38,6 +38,7 @@ export default function CartPage() {
               <button
                 className="cart-item-remove"
                 onClick={() => removeFromCart(item.productId, item.color, item.storage)}
+                aria-label={`Remove ${item.name} in ${item.color} ${item.storage} from cart`}
               >
                 Eliminar
               </button>

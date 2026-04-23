@@ -9,12 +9,12 @@ export default function Layout() {
   return (
     <div className="container">
       <header className="header">
-        <Link to="/" className="header-logo">
+        <Link to="/" className="header-logo" aria-label="Zara Home">
           ZARA
         </Link>
         {!isCartPage && (
           <div className="header-cart">
-            <Link to="/cart">Cart ({cartTotalItems})</Link>
+            <Link to="/cart" aria-label={`View cart with ${cartTotalItems} items`}>Cart ({cartTotalItems})</Link>
           </div>
         )}
       </header>

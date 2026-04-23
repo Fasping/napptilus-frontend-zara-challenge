@@ -39,9 +39,14 @@ export default function HomePage() {
             placeholder="Search for a smartphone..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            aria-label="Search smartphones"
           />
           {searchQuery && (
-            <button className="search-clear" onClick={() => setSearchQuery('')}>
+            <button 
+              className="search-clear" 
+              onClick={() => setSearchQuery('')}
+              aria-label="Clear search"
+            >
               ×
             </button>
           )}
@@ -64,8 +69,8 @@ export default function HomePage() {
         <div className="empty-state">No products found</div>
       ) : (
         <div className="product-grid">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {products.map((product, index) => (
+            <ProductCard key={`${product.id}-${index}`} product={product} />
           ))}
         </div>
       )}

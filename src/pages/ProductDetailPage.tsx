@@ -93,6 +93,8 @@ export default function ProductDetailPage() {
                     key={storage.capacity}
                     className={`storage-btn ${selectedStorage?.capacity === storage.capacity ? 'selected' : ''}`}
                     onClick={() => setSelectedStorage(storage)}
+                    aria-pressed={selectedStorage?.capacity === storage.capacity}
+                    aria-label={`Select storage ${storage.capacity}`}
                   >
                     {storage.capacity}
                   </button>
@@ -110,6 +112,7 @@ export default function ProductDetailPage() {
                     style={{ backgroundColor: color.hexCode }}
                     onClick={() => setSelectedColor(color)}
                     aria-label={`Select color ${color.name}`}
+                    aria-pressed={selectedColor?.hexCode === color.hexCode}
                   />
                 ))}
               </div>
@@ -164,8 +167,8 @@ export default function ProductDetailPage() {
         <div className="similar-products-section">
           <h2 className="section-title">SIMILAR PRODUCTS</h2>
           <div className="product-grid similar-grid" ref={similarGridRef}>
-            {product.similarProducts.map((similar) => (
-              <ProductCard key={similar.id} product={similar} />
+            {product.similarProducts.map((similar, index) => (
+              <ProductCard key={`${similar.id}-${index}`} product={similar} />
             ))}
           </div>
           <div className="similar-indicator">
