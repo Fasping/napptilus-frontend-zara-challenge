@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getProductById } from '../services/api';
 import { ProductDetail, ColorOption, StorageOption } from '../types';
@@ -15,6 +15,8 @@ export default function ProductDetailPage() {
   const [selectedStorage, setSelectedStorage] = useState<StorageOption | null>(null);
   
   const { addToCart } = useCart();
+  const similarGridRef = useRef<HTMLDivElement>(null);
+  const thumbRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     async function fetchProduct() {
@@ -36,6 +38,29 @@ export default function ProductDetailPage() {
 
     fetchProduct();
   }, [id]);
+
+  useEffect(() => {
+    const grid = similarGridRef.current;
+    const thumb = thumbRef.current;
+    if (!grid || !thumb) return;
+
+    const updateThumb = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = grid;
+      if (scrollWidth <= clientWidth) {
+        thumb.style.display = 'none';
+        return;
+      }
+      thumb.style.display = 'block';
+      const thumbWidthPct = (clientWidth / scrollWidth) * 100;
+      const thumbLeftPct = (scrollLeft / (scrollWidth - clientWidth)) * (100 - thumbWidthPct);
+      thumb.style.width = `${thumbWidthPct}%`;
+      thumb.style.left = `${thumbLeftPct}%`;
+    };
+
+    grid.addEventListener('scroll', updateThumb);
+    updateThumb();
+    return () => grid.removeEventListener('scroll', updateThumb);
+  }, [product]);
 
   if (loading) return <div className="loading-state">Loading product...</div>;
   if (error || !product) return <div className="error-state">{error || 'Product not found.'}</div>;
@@ -61,22 +86,7 @@ export default function ProductDetailPage() {
 
           <div className="product-options">
             <div className="option-group">
-              <span className="option-label">COLOR: {selectedColor?.name || ''}</span>
-              <div className="color-options">
-                {product.colorOptions.map((color) => (
-                  <button
-                    key={color.hexCode}
-                    className={`color-btn ${selectedColor?.hexCode === color.hexCode ? 'selected' : ''}`}
-                    style={{ backgroundColor: color.hexCode }}
-                    onClick={() => setSelectedColor(color)}
-                    aria-label={`Select color ${color.name}`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className="option-group">
-              <span className="option-label">STORAGE: {selectedStorage?.capacity || ''}</span>
+              <span className="option-label">STORAGE ¿HOW MUCH SPACE DO YOU NEED?</span>
               <div className="storage-options">
                 {product.storageOptions.map((storage) => (
                   <button
@@ -88,6 +98,22 @@ export default function ProductDetailPage() {
                   </button>
                 ))}
               </div>
+            </div>
+
+            <div className="option-group">
+              <span className="option-label">COLOR. PICK YOUR FAVOURITE.</span>
+              <div className="color-options">
+                {product.colorOptions.map((color) => (
+                  <button
+                    key={color.hexCode}
+                    className={`color-btn ${selectedColor?.hexCode === color.hexCode ? 'selected' : ''}`}
+                    style={{ backgroundColor: color.hexCode }}
+                    onClick={() => setSelectedColor(color)}
+                    aria-label={`Select color ${color.name}`}
+                  />
+                ))}
+              </div>
+              <span className="selected-color-name">{selectedColor?.name || '\u00A0'}</span>
             </div>
           </div>
 
@@ -109,7 +135,7 @@ export default function ProductDetailPage() {
               }
             }}
           >
-            ADD TO CART
+            AÑADIR
           </button>
         </div>
       </div>
@@ -137,10 +163,13 @@ export default function ProductDetailPage() {
       {product.similarProducts.length > 0 && (
         <div className="similar-products-section">
           <h2 className="section-title">SIMILAR PRODUCTS</h2>
-          <div className="product-grid">
+          <div className="product-grid similar-grid" ref={similarGridRef}>
             {product.similarProducts.map((similar) => (
               <ProductCard key={similar.id} product={similar} />
             ))}
+          </div>
+          <div className="similar-indicator">
+            <div className="similar-indicator-thumb" ref={thumbRef} />
           </div>
         </div>
       )}

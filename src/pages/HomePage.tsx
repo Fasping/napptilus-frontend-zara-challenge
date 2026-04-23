@@ -32,13 +32,20 @@ export default function HomePage() {
   return (
     <div>
       <div className="search-section">
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Search for a smartphone..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
+        <div className="search-input-wrapper">
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Search for a smartphone..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          {searchQuery && (
+            <button className="search-clear" onClick={() => setSearchQuery('')}>
+              ×
+            </button>
+          )}
+        </div>
         <div className="search-info">
           <div className="results-count">
             {products.length} RESULTS
